@@ -1,0 +1,659 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f8fc">
+<meta name="description" content="WorldLingua 学习探索空间：多语言课程、德语字母、汉字学习和游戏化教育。">
+<title>WorldLingua · 学习探索空间</title>
+
+<style>
+:root {
+  --bg:#f7f8fc;
+  --surface:#fff;
+  --text:#20243a;
+  --muted:#777d91;
+  --border:#e8eaf2;
+  --primary:#595ce2;
+  --soft:#eeeeff;
+  --shadow:0 12px 35px #252a5a10;
+}
+[data-theme="dark"] {
+  color-scheme:dark;
+  --bg:#131521;
+  --surface:#1d2030;
+  --text:#f2f3ff;
+  --muted:#b0b5cb;
+  --border:#33364a;
+  --primary:#aaaaff;
+  --soft:#30304d;
+  --shadow:0 12px 35px #0003;
+}
+* {box-sizing:border-box}
+html {scroll-behavior:smooth}
+body {
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Inter,"Segoe UI","Microsoft YaHei",sans-serif;
+  line-height:1.65;
+}
+a {color:inherit;text-decoration:none}
+button,input {font:inherit}
+.container {width:min(1100px,calc(100% - 36px));margin:auto}
+
+/* 导航栏 */
+.nav {
+  height:76px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+}
+.brand {
+  display:flex;
+  align-items:center;
+  gap:11px;
+  font-size:21px;
+  font-weight:850;
+  letter-spacing:-.5px;
+}
+.brand-icon {
+  width:42px;height:42px;
+  display:grid;place-items:center;
+  border-radius:14px;
+  color:white;
+  font-size:24px;
+  background:linear-gradient(135deg,#8283ff,#5152d5);
+  box-shadow:0 5px 16px #6666df35;
+}
+.nav-right {display:flex;align-items:center;gap:19px}
+.nav-right a {font-size:13px;color:var(--muted)}
+.theme-button {
+  width:39px;height:39px;
+  border:1px solid var(--border);
+  border-radius:12px;
+  background:var(--surface);
+  color:var(--text);
+  cursor:pointer;
+}
+
+/* 首屏 */
+.hero {
+  position:relative;
+  overflow:hidden;
+  margin:24px 0 54px;
+  padding:57px 48px;
+  border-radius:29px;
+  color:#24254b;
+  background:
+    radial-gradient(ellipse at 90% 15%,#b8b5ff 0,transparent 36%),
+    radial-gradient(ellipse at 12% 100%,#b8e8f3 0,transparent 38%),
+    linear-gradient(125deg,#eeeeff,#f8f6ff 60%,#eaf7ff);
+}
+[data-theme="dark"] .hero {
+  color:#f2f3ff;
+  background:
+    radial-gradient(ellipse at 90% 15%,#55509a80,transparent 38%),
+    linear-gradient(125deg,#252640,#20263a);
+}
+.hero-content {position:relative;z-index:1;max-width:650px}
+.eyebrow {
+  display:inline-block;
+  padding:5px 12px;
+  border:1px solid #7775d440;
+  border-radius:99px;
+  background:#ffffff80;
+  font-size:12px;
+  font-weight:750;
+  letter-spacing:1px;
+}
+[data-theme="dark"] .eyebrow {background:#ffffff0b}
+.hero h1 {
+  margin:22px 0 14px;
+  font-size:clamp(38px,6vw,64px);
+  line-height:1.13;
+  letter-spacing:-2px;
+}
+.gradient-text {
+  background:linear-gradient(100deg,#5856d9,#8c62d8,#368db9);
+  color:transparent;
+  background-clip:text;
+  -webkit-background-clip:text;
+}
+.hero p {max-width:560px;color:var(--muted);font-size:15px}
+.hero-actions {display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.button {
+  display:inline-flex;
+  justify-content:center;
+  align-items:center;
+  gap:8px;
+  padding:11px 18px;
+  border:1px solid var(--border);
+  border-radius:12px;
+  background:var(--surface);
+  color:var(--text);
+  font-size:13px;
+  font-weight:750;
+}
+.button-primary {background:#595ce2;color:#fff;border-color:#595ce2}
+.button:hover {transform:translateY(-2px)}
+
+/* 项目区 */
+.section {margin-bottom:54px}
+.section-heading {
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+  gap:15px;
+  margin-bottom:21px;
+}
+.section-heading h2 {margin:0;font-size:28px;letter-spacing:-.6px}
+.section-heading p {margin:5px 0 0;color:var(--muted);font-size:13px}
+.count {
+  padding:5px 10px;
+  border-radius:9px;
+  background:var(--soft);
+  color:var(--primary);
+  font-size:12px;
+}
+.tools {display:flex;flex-wrap:wrap;gap:9px;margin-bottom:19px}
+.search {
+  display:flex;align-items:center;gap:8px;
+  flex:1;min-width:180px;
+  padding:0 12px;
+  border:1px solid var(--border);
+  border-radius:11px;
+  background:var(--surface);
+}
+.search input {
+  width:100%;min-height:42px;
+  border:0;outline:0;
+  background:transparent;color:var(--text);
+}
+.filter {
+  padding:9px 14px;
+  border:1px solid var(--border);
+  border-radius:11px;
+  background:var(--surface);
+  color:var(--muted);
+  cursor:pointer;
+  font-size:12px;
+}
+.filter.active {
+  border-color:var(--primary);
+  background:var(--soft);
+  color:var(--primary);
+  font-weight:750;
+}
+.project-grid {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:21px;
+}
+.project-card {
+  overflow:hidden;
+  border:1px solid var(--border);
+  border-radius:21px;
+  background:var(--surface);
+  box-shadow:0 3px 15px #20243a05;
+  transition:transform .23s,box-shadow .23s,border-color .23s;
+}
+.project-card:hover {
+  transform:translateY(-4px);
+  border-color:#b8b8ff;
+  box-shadow:var(--shadow);
+}
+.preview {
+  position:relative;
+  overflow:hidden;
+  aspect-ratio:16/9;
+  background:#eef0f8;
+}
+.preview svg {
+  display:block;
+  width:100%;height:100%;
+  transition:transform .35s;
+}
+.project-card:hover .preview svg {transform:scale(1.035)}
+.preview::after {
+  content:"";
+  position:absolute;inset:0;
+  pointer-events:none;
+  box-shadow:inset 0 -22px 35px #151a3010;
+}
+.card-body {padding:20px 22px 18px}
+.card-title-row {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+}
+.card-title-row h3 {margin:0;font-size:21px;letter-spacing:-.4px}
+.tag {
+  padding:4px 9px;
+  border-radius:8px;
+  background:var(--soft);
+  color:var(--primary);
+  font-size:11px;
+  white-space:nowrap;
+}
+.subtitle {margin:4px 0 10px;color:var(--muted);font-size:12px}
+.description {min-height:45px;margin:0 0 16px;font-size:13px;color:var(--muted)}
+.card-bottom {
+  display:flex;align-items:center;justify-content:space-between;
+  gap:10px;padding-top:13px;
+  border-top:1px solid var(--border);
+}
+.card-bottom small {font-size:11px;color:var(--muted)}
+.open-link {font-size:13px;font-weight:800;color:var(--primary)}
+.open-link:hover {text-decoration:underline}
+.empty {
+  grid-column:1/-1;
+  padding:32px;
+  border:1px dashed var(--border);
+  border-radius:15px;
+  text-align:center;color:var(--muted);
+}
+
+/* 关于 */
+.about-grid {display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.about-item {
+  padding:20px;
+  border:1px solid var(--border);
+  border-radius:16px;
+  background:var(--surface);
+}
+.about-item .emoji {font-size:24px}
+.about-item h3 {margin:8px 0 5px;font-size:15px}
+.about-item p {margin:0;color:var(--muted);font-size:12px}
+footer {
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;
+  padding:23px 0 30px;
+  border-top:1px solid var(--border);
+  color:var(--muted);font-size:11px;
+}
+footer a {color:var(--primary)}
+
+@media(max-width:680px) {
+  .container {width:calc(100% - 28px)}
+  .nav {height:66px}
+  .nav-right a {display:none}
+  .hero {margin:14px 0 39px;padding:36px 24px;border-radius:22px}
+  .hero h1 {letter-spacing:-1px}
+  .project-grid {grid-template-columns:1fr;gap:17px}
+  .card-body {padding:17px}
+  .about-grid {grid-template-columns:1fr}
+  .section {margin-bottom:40px}
+  .section-heading {align-items:start}
+  .filter {flex:1}
+}
+@media(prefers-reduced-motion:reduce) {
+  *,*::before,*::after {scroll-behavior:auto!important;transition:none!important}
+}
+</style>
+</head>
+
+<body>
+<header class="container nav">
+  <a class="brand" href="#">
+    <span class="brand-icon">W</span>
+    <span>WorldLingua</span>
+  </a>
+  <nav class="nav-right">
+    <a href="#projects">学习项目</a>
+    <a href="#about">关于本站</a>
+    <a href="https://github.com/lernenmachtspass" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+    <button class="theme-button" id="themeButton" aria-label="切换深色模式">☾</button>
+  </nav>
+</header>
+
+<main class="container">
+  <section class="hero">
+    <div class="hero-content">
+      <span class="eyebrow">✦ YOUR LEARNING SPACE</span>
+      <h1>让学习变得<br><span class="gradient-text">有趣又简单。</span></h1>
+      <p>欢迎来到我的互动学习空间。这里汇集多语言课程、德语字母启蒙、汉字练习与游戏化学习工具。选择一个项目，开始探索。</p>
+      <div class="hero-actions">
+        <a class="button button-primary" href="#projects">探索所有项目 →</a>
+        <a class="button" href="https://github.com/lernenmachtspass" target="_blank" rel="noopener noreferrer">查看 GitHub ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="projects">
+    <div class="section-heading">
+      <div>
+        <h2>探索学习项目</h2>
+        <p>每一个项目，都是一种新的学习体验。</p>
+      </div>
+      <span class="count" id="projectCount">4 个项目</span>
+    </div>
+
+    <div class="tools">
+      <label class="search">
+        <span>⌕</span>
+        <input id="searchInput" type="search" placeholder="搜索项目或学习内容…" aria-label="搜索项目">
+      </label>
+      <button class="filter active" data-filter="all">全部</button>
+      <button class="filter" data-filter="language">语言学习</button>
+      <button class="filter" data-filter="game">游戏化</button>
+    </div>
+
+    <div class="project-grid" id="projectGrid">
+
+      <!-- 1. WorldLingua：多语言课程界面 -->
+      <article class="project-card" data-category="language" data-search="worldlingua 多语言 德语 英语 法语 西班牙语 日语 课程">
+        <a href="https://lernenmachtspass.github.io/WorldLingua/" aria-label="进入 WorldLingua">
+          <div class="preview">
+            <svg viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="多语言学习网站示意图">
+              <defs>
+                <linearGradient id="wlbg" x1="0" y1="0" x2="1" y2="1">
+                  <stop stop-color="#f0efff"/><stop offset="1" stop-color="#e6f7ff"/>
+                </linearGradient>
+                <linearGradient id="wlhero" x1="0" y1="0" x2="1" y2="1">
+                  <stop stop-color="#6867ed"/><stop offset="1" stop-color="#9c72e8"/>
+                </linearGradient>
+              </defs>
+              <rect width="640" height="360" fill="url(#wlbg)"/>
+              <rect x="0" y="0" width="640" height="38" fill="#fff"/>
+              <circle cx="19" cy="19" r="5" fill="#ff8585"/>
+              <circle cx="36" cy="19" r="5" fill="#ffcf69"/>
+              <circle cx="53" cy="19" r="5" fill="#6ed5a3"/>
+              <rect x="220" y="10" width="200" height="18" rx="9" fill="#f0f1f7"/>
+              <text x="320" y="22" text-anchor="middle" font-size="9" fill="#85899b">lernenmachtspass.github.io</text>
+              <rect x="25" y="53" width="590" height="37" rx="10" fill="#fff" opacity=".95"/>
+              <rect x="38" y="62" width="19" height="19" rx="6" fill="#6867ed"/>
+              <text x="47.5" y="76" text-anchor="middle" font-size="12" font-weight="bold" fill="#fff">W</text>
+              <text x="65" y="76" font-size="13" font-weight="bold" fill="#292d50">WorldLingua</text>
+              <text x="480" y="75" font-size="9" fill="#747990">Courses　 Practice　 Progress</text>
+              <rect x="25" y="103" width="590" height="128" rx="15" fill="url(#wlhero)"/>
+              <circle cx="543" cy="144" r="49" fill="#fff" opacity=".10"/>
+              <circle cx="569" cy="194" r="25" fill="#fff" opacity=".10"/>
+              <text x="45" y="129" font-size="9" font-weight="bold" fill="#e4e3ff">YOUR LANGUAGE JOURNEY</text>
+              <text x="45" y="156" font-size="25" font-weight="bold" fill="#fff">Learn a new language.</text>
+              <text x="45" y="181" font-size="25" font-weight="bold" fill="#fff">Open a new world.</text>
+              <text x="45" y="203" font-size="10" fill="#eeeaff">Vocabulary · Dialogues · Practice</text>
+              <rect x="45" y="211" width="100" height="9" rx="4.5" fill="#fff" opacity=".25"/>
+              <rect x="45" y="211" width="72" height="9" rx="4.5" fill="#fff"/>
+              <text x="27" y="251" font-size="12" font-weight="bold" fill="#303453">Choose your language</text>
+              <g>
+                <rect x="25" y="263" width="111" height="73" rx="10" fill="#fff"/>
+                <rect x="147" y="263" width="111" height="73" rx="10" fill="#fff"/>
+                <rect x="269" y="263" width="111" height="73" rx="10" fill="#fff"/>
+                <rect x="391" y="263" width="111" height="73" rx="10" fill="#fff"/>
+                <rect x="513" y="263" width="102" height="73" rx="10" fill="#fff"/>
+                <text x="80" y="288" text-anchor="middle" font-size="21">🇩🇪</text>
+                <text x="202" y="288" text-anchor="middle" font-size="21">🇬🇧</text>
+                <text x="324" y="288" text-anchor="middle" font-size="21">🇫🇷</text>
+                <text x="446" y="288" text-anchor="middle" font-size="21">🇪🇸</text>
+                <text x="564" y="288" text-anchor="middle" font-size="21">🇯🇵</text>
+                <g font-size="10" text-anchor="middle" fill="#343750" font-weight="bold">
+                  <text x="80" y="309">Deutsch</text><text x="202" y="309">English</text>
+                  <text x="324" y="309">Français</text><text x="446" y="309">Español</text>
+                  <text x="564" y="309">日本語</text>
+                </g>
+                <g font-size="8" text-anchor="middle" fill="#888da0">
+                  <text x="80" y="324">A0–B1</text><text x="202" y="324">A0–B1</text>
+                  <text x="324" y="324">A0–B1</text><text x="446" y="324">A0–B1</text>
+                  <text x="564" y="324">A0–B1</text>
+                </g>
+              </g>
+            </svg>
+          </div>
+        </a>
+        <div class="card-body">
+          <div class="card-title-row"><h3>WorldLingua</h3><span class="tag">多语言课程</span></div>
+          <p class="subtitle">Learn languages. Explore the world.</p>
+          <p class="description">德语、英语、法语、西班牙语和日语。通过词汇、例句、对话与练习循序渐进地学习。</p>
+          <div class="card-bottom"><small>5 种语言 · A0–B1</small><a class="open-link" href="https://lernenmachtspass.github.io/WorldLingua/">开始学习 ↗</a></div>
+        </div>
+      </article>
+
+      <!-- 2. Buchstaben：德语字母学习界面 -->
+      <article class="project-card" data-category="language" data-search="buchstaben 德语 字母 ABC 描红 发音 词汇">
+        <a href="https://lernenmachtspass.github.io/buchstaben/" aria-label="进入 Buchstaben">
+          <div class="preview">
+            <svg viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="德语字母学习网站示意图">
+              <rect width="640" height="360" fill="#f8f9ff"/>
+              <rect width="640" height="38" fill="#fff"/>
+              <circle cx="19" cy="19" r="5" fill="#ff8585"/><circle cx="36" cy="19" r="5" fill="#ffcf69"/><circle cx="53" cy="19" r="5" fill="#6ed5a3"/>
+              <rect x="220" y="10" width="200" height="18" rx="9" fill="#f0f1f7"/>
+              <text x="320" y="22" text-anchor="middle" font-size="9" fill="#85899b">lernenmachtspass.github.io</text>
+              <rect x="20" y="51" width="600" height="42" rx="11" fill="#fff"/>
+              <text x="37" y="77" font-size="17" font-weight="bold" fill="#2671e8">🔤 Buchstaben</text>
+              <text x="485" y="76" font-size="10" fill="#68728a">Deutsch ABC</text>
+              <text x="25" y="119" font-size="20" font-weight="bold" fill="#202d4a">Willkommen!</text>
+              <text x="25" y="137" font-size="10" fill="#7a8499">Entdecke das deutsche Alphabet</text>
+              <rect x="25" y="150" width="590" height="174" rx="15" fill="#fff" stroke="#e7eaf4"/>
+              <rect x="42" y="167" width="236" height="140" rx="12" fill="#edf3ff"/>
+              <text x="160" y="251" text-anchor="middle" font-size="96" font-weight="bold" fill="#286ee8">A</text>
+              <text x="160" y="280" text-anchor="middle" font-size="11" fill="#687a9d">A a · Apfel 🍎</text>
+              <rect x="295" y="167" width="300" height="140" rx="12" fill="#fff9ed"/>
+              <text x="314" y="191" font-size="12" font-weight="bold" fill="#37415d">Schreibe den Buchstaben</text>
+              <rect x="314" y="201" width="262" height="89" rx="8" fill="#fff" stroke="#e3d9c4"/>
+              <path d="M340 264 L365 215 L390 264 M350 246 L380 246" fill="none" stroke="#c1c8d9" stroke-width="3" stroke-dasharray="5 5" stroke-linecap="round"/>
+              <path d="M426 216 L426 264 M426 216 L456 216 Q478 216 456 240 L426 240 M426 240 L459 264" fill="none" stroke="#d3d9e7" stroke-width="3" stroke-dasharray="5 5" stroke-linecap="round"/>
+              <text x="314" y="300" font-size="9" fill="#858da2">Nachspuren · Hören · Lernen</text>
+              <g font-size="11" font-weight="bold" text-anchor="middle">
+                <rect x="25" y="334" width="34" height="20" rx="6" fill="#2f77eb"/><text x="42" y="348" fill="#fff">A</text>
+                <rect x="65" y="334" width="34" height="20" rx="6" fill="#fff" stroke="#e3e7f0"/><text x="82" y="348" fill="#5a6380">B</text>
+                <rect x="105" y="334" width="34" height="20" rx="6" fill="#fff" stroke="#e3e7f0"/><text x="122" y="348" fill="#5a6380">C</text>
+                <rect x="145" y="334" width="34" height="20" rx="6" fill="#fff" stroke="#e3e7f0"/><text x="162" y="348" fill="#5a6380">D</text>
+                <rect x="185" y="334" width="34" height="20" rx="6" fill="#fff" stroke="#e3e7f0"/><text x="202" y="348" fill="#5a6380">E</text>
+              </g>
+            </svg>
+          </div>
+        </a>
+        <div class="card-body">
+          <div class="card-title-row"><h3>Buchstaben</h3><span class="tag">德语启蒙</span></div>
+          <p class="subtitle">Deutsch ABC · 字母探险</p>
+          <p class="description">认识德语字母，练习大小写、描红和相关单词，让字母学习更直观、更有趣。</p>
+          <div class="card-bottom"><small>字母 · 发音 · 词汇</small><a class="open-link" href="https://lernenmachtspass.github.io/buchstaben/">开始学习 ↗</a></div>
+        </div>
+      </article>
+
+      <!-- 3. Hanzi：汉字学习界面 -->
+      <article class="project-card" data-category="language" data-search="hanzi 汉字 中文 认读 书写 测试 练习">
+        <a href="https://lernenmachtspass.github.io/hanzi/" aria-label="进入 Hanzi">
+          <div class="preview">
+            <svg viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="汉字学习网站示意图">
+              <rect width="640" height="360" fill="#f5faf7"/>
+              <rect width="640" height="38" fill="#fff"/>
+              <circle cx="19" cy="19" r="5" fill="#ff8585"/><circle cx="36" cy="19" r="5" fill="#ffcf69"/><circle cx="53" cy="19" r="5" fill="#6ed5a3"/>
+              <rect x="220" y="10" width="200" height="18" rx="9" fill="#f0f1f7"/>
+              <text x="320" y="22" text-anchor="middle" font-size="9" fill="#85899b">lernenmachtspass.github.io</text>
+              <rect x="22" y="52" width="596" height="43" rx="10" fill="#fff"/>
+              <rect x="35" y="62" width="24" height="24" rx="7" fill="#20a36b"/>
+              <text x="47" y="80" text-anchor="middle" font-size="15" font-weight="bold" fill="#fff">汉</text>
+              <text x="68" y="79" font-size="15" font-weight="bold" fill="#234536">汉字学习</text>
+              <text x="492" y="78" font-size="10" fill="#7b8e85">学习　练习　测试</text>
+              <text x="27" y="123" font-size="19" font-weight="bold" fill="#234536">认识汉字，从这里开始</text>
+              <text x="27" y="142" font-size="10" fill="#789087">Learn Chinese characters step by step.</text>
+              <rect x="26" y="155" width="285" height="166" rx="14" fill="#fff" stroke="#e1eee6"/>
+              <rect x="41" y="170" width="255" height="110" rx="10" fill="#eaf7ef"/>
+              <text x="168" y="249" text-anchor="middle" font-size="77" font-weight="bold" fill="#169761">山</text>
+              <text x="168" y="299" text-anchor="middle" font-size="11" fill="#536f60">shān · mountain · 山</text>
+              <rect x="326" y="155" width="288" height="166" rx="14" fill="#fff" stroke="#e1eee6"/>
+              <text x="344" y="178" font-size="12" font-weight="bold" fill="#234536">选择正确的意思</text>
+              <rect x="344" y="190" width="252" height="32" rx="8" fill="#f1faf4" stroke="#c7e9d3"/>
+              <text x="359" y="210" font-size="11" fill="#28734e">A. 山 · mountain</text>
+              <circle cx="579" cy="206" r="8" fill="#22a76d"/>
+              <path d="M575 206 L578 209 L583 202" fill="none" stroke="#fff" stroke-width="1.5"/>
+              <rect x="344" y="230" width="252" height="32" rx="8" fill="#fafbfc" stroke="#e6e9ed"/>
+              <text x="359" y="250" font-size="11" fill="#66716d">B. 水 · water</text>
+              <rect x="344" y="270" width="252" height="32" rx="8" fill="#fafbfc" stroke="#e6e9ed"/>
+              <text x="359" y="290" font-size="11" fill="#66716d">C. 木 · tree</text>
+              <text x="27" y="344" font-size="10" fill="#6f8c7d">识字　词汇　练习　进步</text>
+              <circle cx="584" cy="342" r="12" fill="#d9f3e2"/>
+              <path d="M579 342 L583 346 L590 337" fill="none" stroke="#1e9b62" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+        </a>
+        <div class="card-body">
+          <div class="card-title-row"><h3>Hanzi · 汉字学习</h3><span class="tag">中文学习</span></div>
+          <p class="subtitle">Discover Chinese characters.</p>
+          <p class="description">通过汉字认读、词义理解与互动测试，逐步积累中文识字量和词汇知识。</p>
+          <div class="card-bottom"><small>认字 · 词汇 · 测试</small><a class="open-link" href="https://lernenmachtspass.github.io/hanzi/">开始学习 ↗</a></div>
+        </div>
+      </article>
+
+      <!-- 4. LatinCraft：像素风游戏界面 -->
+      <article class="project-card" data-category="game" data-search="latincraft 游戏 游戏化 词汇 闯关 像素 探索">
+        <a href="https://lernenmachtspass.github.io/latincraft/" aria-label="进入 LatinCraft">
+          <div class="preview">
+            <svg viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="像素风格游戏化学习网站示意图">
+              <rect width="640" height="360" fill="#172b43"/>
+              <rect width="640" height="38" fill="#111e31"/>
+              <circle cx="19" cy="19" r="5" fill="#ff8585"/><circle cx="36" cy="19" r="5" fill="#ffcf69"/><circle cx="53" cy="19" r="5" fill="#6ed5a3"/>
+              <rect x="220" y="10" width="200" height="18" rx="9" fill="#26364b"/>
+              <text x="320" y="22" text-anchor="middle" font-size="9" fill="#b7c6d9">lernenmachtspass.github.io</text>
+              <rect x="20" y="51" width="600" height="39" rx="8" fill="#243b53"/>
+              <text x="37" y="76" font-size="17" font-weight="bold" fill="#f9dc82">▣ LATINCRAFT</text>
+              <text x="485" y="74" font-size="10" fill="#c2d3e6">QUEST　 INVENTORY</text>
+              <rect x="20" y="101" width="600" height="173" rx="9" fill="#294c60"/>
+              <!-- 像素风天空 -->
+              <rect x="30" y="111" width="580" height="100" fill="#68b9cf"/>
+              <rect x="58" y="128" width="36" height="12" fill="#c4edf1"/>
+              <rect x="46" y="140" width="60" height="12" fill="#c4edf1"/>
+              <rect x="467" y="125" width="44" height="12" fill="#d9f1f4"/>
+              <rect x="451" y="137" width="76" height="12" fill="#d9f1f4"/>
+              <!-- 远山 -->
+              <path d="M30 210 L105 157 L151 194 L222 144 L301 210 Z" fill="#538d85"/>
+              <path d="M235 210 L330 153 L389 190 L471 146 L610 210 Z" fill="#477f79"/>
+              <!-- 草地像素 -->
+              <rect x="30" y="211" width="580" height="51" fill="#63ad66"/>
+              <rect x="30" y="211" width="580" height="9" fill="#8dd16f"/>
+              <g fill="#397d4c">
+                <rect x="62" y="232" width="16" height="10"/><rect x="78" y="242" width="16" height="10"/>
+                <rect x="186" y="222" width="12" height="12"/><rect x="198" y="234" width="12" height="12"/>
+                <rect x="513" y="228" width="16" height="12"/><rect x="529" y="240" width="16" height="12"/>
+              </g>
+              <!-- 像素人物 -->
+              <rect x="300" y="173" width="24" height="24" fill="#f4c59a"/>
+              <rect x="294" y="168" width="36" height="10" fill="#493c43"/>
+              <rect x="294" y="178" width="8" height="18" fill="#493c43"/>
+              <rect x="322" y="178" width="8" height="18" fill="#493c43"/>
+              <rect x="298" y="197" width="28" height="29" fill="#5c66e8"/>
+              <rect x="288" y="200" width="10" height="23" fill="#f4c59a"/>
+              <rect x="326" y="200" width="10" height="23" fill="#f4c59a"/>
+              <rect x="301" y="226" width="9" height="19" fill="#38445c"/>
+              <rect x="316" y="226" width="9" height="19" fill="#38445c"/>
+              <!-- 收集物 -->
+              <rect x="133" y="196" width="22" height="22" fill="#f8d86c"/>
+              <rect x="139" y="190" width="10" height="34" fill="#fff1a3"/>
+              <rect x="127" y="202" width="34" height="10" fill="#fff1a3"/>
+              <rect x="429" y="193" width="24" height="24" fill="#ee8a62"/>
+              <rect x="435" y="187" width="12" height="36" fill="#ffbd75"/>
+              <!-- 底部任务栏 -->
+              <rect x="20" y="284" width="600" height="59" rx="8" fill="#203349" stroke="#496078"/>
+              <rect x="33" y="295" width="35" height="35" fill="#3a536c" stroke="#8093a4"/>
+              <text x="50" y="318" text-anchor="middle" font-size="18">📖</text>
+              <text x="81" y="306" font-size="10" font-weight="bold" fill="#f9dc82">VOCABULARY QUEST</text>
+              <text x="81" y="322" font-size="9" fill="#d4e0ed">Learn a word to unlock the next level.</text>
+              <rect x="453" y="300" width="147" height="27" rx="5" fill="#f3ce69"/>
+              <text x="526" y="317" text-anchor="middle" font-size="10" font-weight="bold" fill="#423b28">START QUEST →</text>
+            </svg>
+          </div>
+        </a>
+        <div class="card-body">
+          <div class="card-title-row"><h3>LatinCraft</h3><span class="tag">游戏化学习</span></div>
+          <p class="subtitle">Learn by playing.</p>
+          <p class="description">以像素风格和探索式体验为灵感，把学习过程设计得更有参与感，边玩边学。</p>
+          <div class="card-bottom"><small>探索 · 互动 · 挑战</small><a class="open-link" href="https://lernenmachtspass.github.io/latincraft/">开始体验 ↗</a></div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="section" id="about">
+    <div class="section-heading">
+      <div>
+        <h2>一个入口，多种探索</h2>
+        <p>把不同的学习工具汇集在同一个地方。</p>
+      </div>
+    </div>
+    <div class="about-grid">
+      <div class="about-item">
+        <div class="emoji">🧩</div>
+        <h3>互动式学习</h3>
+        <p>将知识转化为易于理解和操作的小任务。</p>
+      </div>
+      <div class="about-item">
+        <div class="emoji">🌍</div>
+        <h3>语言与文化</h3>
+        <p>通过不同语言和文字，发现更广阔的世界。</p>
+      </div>
+      <div class="about-item">
+        <div class="emoji">🚀</div>
+        <h3>持续更新</h3>
+        <p>新项目上线后，可以继续加入这个项目集合。</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="container">
+  <span>© <span id="year"></span> WorldLingua · Learn something new every day.</span>
+  <a href="https://github.com/lernenmachtspass" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+</footer>
+
+<script>
+const searchInput = document.getElementById("searchInput");
+const cards = [...document.querySelectorAll(".project-card")];
+const filters = [...document.querySelectorAll(".filter")];
+const projectCount = document.getElementById("projectCount");
+let activeFilter = "all";
+
+function filterProjects() {
+  const query = searchInput.value.trim().toLowerCase();
+  let visible = 0;
+
+  cards.forEach(card => {
+    const matchesText =
+      card.dataset.search.toLowerCase().includes(query) ||
+      card.innerText.toLowerCase().includes(query);
+    const matchesCategory =
+      activeFilter === "all" || card.dataset.category === activeFilter;
+    const show = matchesText && matchesCategory;
+    card.hidden = !show;
+    if (show) visible++;
+  });
+
+  let empty = document.getElementById("emptyMessage");
+  if (visible === 0 && !empty) {
+    empty = document.createElement("div");
+    empty.id = "emptyMessage";
+    empty.className = "empty";
+    empty.textContent = "没有找到匹配的项目，请尝试其他关键词。";
+    document.getElementById("projectGrid").appendChild(empty);
+  } else if (visible > 0 && empty) {
+    empty.remove();
+  }
+  projectCount.textContent = visible + " 个项目";
+}
+
+searchInput.addEventListener("input", filterProjects);
+
+filters.forEach(button => {
+  button.addEventListener("click", () => {
+    activeFilter = button.dataset.filter;
+    filters.forEach(item => item.classList.toggle("active", item === button));
+    filterProjects();
+  });
+});
+
+document.getElementById("themeButton").addEventListener("click", () => {
+  const root = document.documentElement;
+  const dark = root.dataset.theme !== "dark";
+  root.dataset.theme = dark ? "dark" : "light";
+  document.getElementById("themeButton").textContent = dark ? "☀" : "☾";
+  document.querySelector('meta[name="theme-color"]')
+    .setAttribute("content", dark ? "#131521" : "#f7f8fc");
+});
+
+document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
