@@ -321,25 +321,95 @@ footer a {color:var(--primary)}
     </div>
   </section>
 
-   <section class="section" id="about">
-    <div class="about-grid">
-      <div class="about-item">
-        <div class="emoji">🧩</div>
-        <h3>互动式学习</h3>
-        <p>将知识转化为易于理解和操作的小任务。</p>
-      </div>
-      <div class="about-item">
-        <div class="emoji">🌍</div>
-        <h3>语言与文化</h3>
-        <p>通过不同语言和文字，发现更广阔的世界。</p>
-      </div>
-      <div class="about-item">
-        <div class="emoji">🚀</div>
-        <h3>持续更新</h3>
-        <p>新项目上线后，可以继续加入这个项目集合。</p>
-      </div>
+
+<style>
+  #about .about-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 24px 0;
+  }
+
+  #about .about-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    box-shadow: none;
+    text-align: center;
+  }
+
+  #about .about-icon {
+    width: 32px;
+    height: 32px;
+    fill: none;
+    stroke: #334155;
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  #about .about-item h3 {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 500;
+    color: #334155;
+  }
+
+  @media (max-width: 480px) {
+    #about .about-grid {
+      gap: 8px;
+    }
+
+    #about .about-icon {
+      width: 27px;
+      height: 27px;
+    }
+
+    #about .about-item h3 {
+      font-size: 12px;
+    }
+  }
+</style>
+
+<section class="section" id="about">
+  <div class="about-grid">
+
+    <div class="about-item">
+      <svg class="about-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <rect x="3" y="3" width="8" height="8" rx="1.5"/>
+        <rect x="13" y="3" width="8" height="8" rx="1.5"/>
+        <rect x="3" y="13" width="8" height="8" rx="1.5"/>
+        <path d="M17 13v8m-4-4h8"/>
+      </svg>
+      <h3>互动式学习</h3>
     </div>
-  </section>
+
+    <div class="about-item">
+      <svg class="about-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="12" cy="12" r="9"/>
+        <path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/>
+      </svg>
+      <h3>语言与文化</h3>
+    </div>
+
+    <div class="about-item">
+      <svg class="about-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M12 3v4m0 10v4M3 12h4m10 0h4"/>
+        <path d="m7 7 2.5 2.5M14.5 14.5 17 17M17 7l-2.5 2.5M9.5 14.5 7 17"/>
+        <circle cx="12" cy="12" r="4"/>
+      </svg>
+      <h3>持续更新</h3>
+    </div>
+
+  </div>
+</section>
+
   
   <section class="section" id="projects">
     <div class="section-heading">
